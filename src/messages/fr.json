@@ -1,0 +1,39 @@
+{
+  "meta": {
+    "description": "Entrepreneur technologique, consultant en gestion de produit et coach. Fondateur de Blabigo, la plateforme de branding personnel LinkedIn alimentée par l'IA."
+  },
+  "navigation": {
+    "home": "Accueil",
+    "about": "À propos",
+    "projects": "Projets",
+    "contact": "Contact"
+  },
+  "home": {
+    "title": "Nabil Chouaib",
+    "subtitle": "Entrepreneur Tech & Consultant en Gestion de Produit",
+    "description": "Fondateur de Blabigo - plateforme de branding personnel LinkedIn alimentée par l'IA. J'aide les entreprises à exceller en gestion de produit et leadership grâce au conseil et au coaching."
+  },
+  "about": {
+    "title": "À propos de moi",
+    "description": "Je suis un entrepreneur technologique, consultant en gestion de produit et coach passionné par la création de solutions innovantes et l'aide aux équipes à développer leurs compétences.",
+    "skills": {
+      "title": "Expertise",
+      "entrepreneurship": "Entrepreneuriat Tech",
+      "consulting": "Conseil en Gestion de Produit",
+      "coaching": "Coaching d'Équipe & Leadership"
+    }
+  },
+  "projects": {
+    "title": "Projets Vedettes",
+    "viewProject": "Voir le projet",
+    "liveDemo": "Démo en direct",
+    "sourceCode": "En savoir plus"
+  },
+  "contact": {
+    "title": "Contactez-moi",
+    "description": "Intéressé par le conseil en gestion de produit, le coaching d'équipe ou les opportunités de collaboration ? Contactons-nous !",
+    "email": "E-mail",
+    "linkedin": "LinkedIn",
+    "github": "GitHub"
+  }
+}
