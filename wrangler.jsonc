@@ -1,7 +1,7 @@
 {
-  "name": "nabilchouaib.com",
+  "name": "nabilchouaib-com",
   "compatibility_date": "2026-02-01",
   "assets": {
-    "directory": "./.next/static"
-  }
+    "directory": "./.next/static",
+  },
 }
