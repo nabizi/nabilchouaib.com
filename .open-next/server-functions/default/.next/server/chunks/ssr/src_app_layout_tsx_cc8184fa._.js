@@ -1,0 +1,3 @@
+module.exports=[27572,a=>{"use strict";function b(){return{title:"Nabil Chouaib - Full Stack Developer",description:"Personal portfolio of Nabil Chouaib, a full stack developer specializing in modern web technologies.",openGraph:{title:"Nabil Chouaib - Full Stack Developer",description:"Personal portfolio of Nabil Chouaib, a full stack developer specializing in modern web technologies.",type:"website"},alternates:{canonical:"/",languages:{en:"/en",de:"/de",fr:"/fr"}}}}async function c({children:a}){return a}a.s(["default",()=>c,"generateMetadata",()=>b])}];
+
+//# sourceMappingURL=src_app_layout_tsx_cc8184fa._.js.map

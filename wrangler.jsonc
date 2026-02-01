@@ -1,7 +1,11 @@
 {
-  "name": "nabilchouaib-com",
-  "compatibility_date": "2026-02-01",
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "main": ".open-next/worker.js",
+  "name": "nabilchouaib",
+  "compatibility_date": "2026-01-30",
+  "compatibility_flags": ["nodejs_compat"],
   "assets": {
-    "directory": "./.next/static",
+    "directory": ".open-next/assets",
+    "binding": "ASSETS",
   },
 }
