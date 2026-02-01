@@ -2,20 +2,19 @@
 
 import {useState} from 'react';
 import {useTranslations} from 'next-intl';
-import {Link, usePathname, useRouter} from '@/i18n/routing';
+import {Link, usePathname} from '@/i18n/routing';
 import {Menu, X, Globe} from 'lucide-react';
 
 export default function Navigation() {
   const t = useTranslations('navigation');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
-  const router = useRouter();
 
   const navItems = [
-    {key: 'home', href: ''},
-    {key: 'about', href: '#about'},
-    {key: 'projects', href: '#projects'},
-    {key: 'contact', href: '#contact'},
+    {key: 'home', href: '/'},
+    {key: 'about', href: '/#about'},
+    {key: 'projects', href: '/#projects'},
+    {key: 'contact', href: '/#contact'},
   ];
 
   const languages = [
@@ -24,25 +23,12 @@ export default function Navigation() {
     {code: 'fr', name: 'Français'},
   ];
 
-  const getCurrentLanguage = () => {
-    const segments = pathname.split('/');
-    return segments[1] || 'en';
-  };
+  // Get current locale
+  const locale = pathname.startsWith('/') ? pathname.split('/')[1] || 'en' : 'en';
 
+  // Custom language switcher that bypasses next-intl's locale preservation
   const switchLanguage = (lang: string) => {
-    const segments = pathname.split('/');
-    const currentLang = segments[1] || 'en';
-    
-    // Remove current language from path
-    segments.splice(1, 1);
-    
-    // Remove empty strings and rebuild path
-    const pathWithoutLang = segments.filter(segment => segment !== '').join('/');
-    
-    // Build new path with target language
-    const newPath = `/${lang}${pathWithoutLang ? '/' + pathWithoutLang : ''}`;
-    
-    router.push(newPath);
+    window.location.href = `/${lang}`;
     setIsMenuOpen(false);
   };
 
@@ -50,7 +36,7 @@ export default function Navigation() {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          <Link href={`/${getCurrentLanguage()}`} className="text-xl font-bold text-gray-900">
+          <Link href="/" className="text-xl font-bold text-gray-900">
             Nabil Chouaib
           </Link>
 
@@ -58,7 +44,7 @@ export default function Navigation() {
             {navItems.map((item) => (
               <Link
                 key={item.key}
-                href={`/${getCurrentLanguage()}${item.href}`}
+                href={item.href}
                 className="text-gray-600 hover:text-gray-900 transition-colors"
               >
                 {t(item.key as any)}
@@ -71,10 +57,10 @@ export default function Navigation() {
               <button className="flex items-center space-x-1 text-gray-600 hover:text-gray-900 p-2 rounded-lg hover:bg-gray-100 transition-colors">
                 <Globe size={16} />
                 <span className="text-sm font-medium">
-                  {languages.find(lang => lang.code === getCurrentLanguage())?.name}
+                  {languages.find(lang => lang.code === locale)?.name}
                 </span>
               </button>
-              <div className="absolute right-0 mt-2 w-32 bg-white rounded-lg shadow-lg border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+              <div className="absolute right-0 mt-2 w-32 bg-white rounded-lg shadow-lg border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
                 {languages.map((lang) => (
                   <button
                     key={lang.code}
@@ -102,7 +88,7 @@ export default function Navigation() {
               {navItems.map((item) => (
                 <Link
                   key={item.key}
-                  href={`/${getCurrentLanguage()}${item.href}`}
+                  href={item.href}
                   className="block px-3 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg"
                   onClick={() => setIsMenuOpen(false)}
                 >
@@ -118,7 +104,7 @@ export default function Navigation() {
                     key={lang.code}
                     onClick={() => switchLanguage(lang.code)}
                     className={`block w-full text-left px-3 py-2 text-sm rounded-lg ${
-                      getCurrentLanguage() === lang.code
+                      locale === lang.code
                         ? 'bg-gray-100 text-gray-900'
                         : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
                     }`}

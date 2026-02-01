@@ -1,16 +1,21 @@
 import {routing} from '@/i18n/routing';
-import {NextResponse} from 'next/server';
 import type {NextRequest} from 'next/server';
 
-export function middleware(request: NextRequest) {
+export default function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
   
-  if (!routing.locales.some(locale => pathname.startsWith(`/${locale}`))) {
+  // Check if there is any supported locale in the pathname
+  const pathnameIsMissingLocale = routing.locales.every(
+    (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
+  );
+
+  // Redirect if there is no locale
+  if (pathnameIsMissingLocale) {
     request.nextUrl.pathname = `/${routing.defaultLocale}${pathname}`;
-    return NextResponse.redirect(request.nextUrl);
+    return Response.redirect(request.nextUrl);
   }
   
-  return NextResponse.next();
+  return undefined;
 }
 
 export const config = {
