@@ -1,6 +1,3 @@
-import {routing} from '@/i18n/routing';
-import {setRequestLocale} from 'next-intl/server';
-
 export function generateMetadata() {
   return {
     title: 'Nabil Chouaib - Full Stack Developer',

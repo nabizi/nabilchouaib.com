@@ -1,14 +1,16 @@
 'use client';
 
 import {useState} from 'react';
-import {useTranslations} from 'next-intl';
-import {Link, usePathname} from '@/i18n/routing';
+import {useTranslations, useLocale} from 'next-intl';
+import {Link, usePathname, useRouter} from '@/i18n/routing';
 import {Menu, X, Globe} from 'lucide-react';
 
 export default function Navigation() {
   const t = useTranslations('navigation');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
+  const locale = useLocale();
 
   const navItems = [
     {key: 'home', href: '/'},
@@ -23,12 +25,8 @@ export default function Navigation() {
     {code: 'fr', name: 'Français'},
   ];
 
-  // Get current locale
-  const locale = pathname.startsWith('/') ? pathname.split('/')[1] || 'en' : 'en';
-
-  // Custom language switcher that bypasses next-intl's locale preservation
   const switchLanguage = (lang: string) => {
-    window.location.href = `/${lang}`;
+    router.replace(pathname, {locale: lang});
     setIsMenuOpen(false);
   };
 

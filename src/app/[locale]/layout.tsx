@@ -1,5 +1,5 @@
 import {NextIntlClientProvider} from 'next-intl';
-import {getMessages, getTranslations} from 'next-intl/server';
+import {getMessages, getTranslations, setRequestLocale} from 'next-intl/server';
 import {Inter} from 'next/font/google';
 import {notFound} from 'next/navigation';
 import {routing} from '@/i18n/routing';
@@ -28,7 +28,7 @@ export async function generateMetadata({params}: {params: Promise<{locale: strin
       canonical: `/${locale}`,
       languages: {
         'en': '/en',
-        'de': '/de', 
+        'de': '/de',
         'fr': '/fr',
       },
     },
@@ -43,11 +43,12 @@ export default async function LocaleLayout({
   params: Promise<{locale: string}>;
 }) {
   const {locale} = await params;
-  
+
   if (!routing.locales.includes(locale as any)) {
     notFound();
   }
 
+  setRequestLocale(locale);
   const messages = await getMessages();
 
   return (
